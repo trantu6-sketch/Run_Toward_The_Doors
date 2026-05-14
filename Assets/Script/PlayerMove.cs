@@ -18,10 +18,31 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded;
     private bool isDead = false;
 
+    public void SetupAnimator(Animator newAnim)
+    {
+        anim = newAnim;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        
+        // Nếu PlayerSkinController chưa gán Animator cho chúng ta
+        if (anim == null)
+        {
+            Animator[] allAnims = GetComponentsInChildren<Animator>();
+            foreach (var a in allAnims)
+            {
+                // Bỏ qua Animator nằm ở gốc (Player) và ưu tiên Animator của Skin đang được bật
+                if (a.gameObject != this.gameObject && a.gameObject.activeInHierarchy)
+                {
+                    anim = a;
+                    break;
+                }
+            }
+            // Nếu vẫn không có, lấy Animator ở gốc làm dự phòng
+            if (anim == null) anim = GetComponent<Animator>();
+        }
 
         // Khóa xoay của Rigidbody để nhân vật không bị ngã lăn ra
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
