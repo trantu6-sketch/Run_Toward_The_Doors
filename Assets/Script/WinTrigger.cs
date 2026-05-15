@@ -17,6 +17,7 @@ public class WinTrigger : MonoBehaviour
 
     [Header("Scene Transition")]
     public string nextSceneName = "Level2"; // Tên của màn chơi tiếp theo
+    public int currentLevelIndex = 1; // Số thứ tự của màn chơi hiện tại (để mở khóa màn tiếp theo)
 
     private bool isTriggered = false;
 
@@ -82,6 +83,15 @@ public class WinTrigger : MonoBehaviour
             winPanel.gameObject.SetActive(true);
             // Hiệu ứng phóng to mượt mà trong 0.5s bằng DOTween
             winPanel.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
+        }
+
+        // 4. Lưu tiến trình mở khóa màn chơi
+        int maxUnlocked = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        // Nếu màn tiếp theo lớn hơn mức mở khóa hiện tại thì cập nhật
+        if (currentLevelIndex + 1 > maxUnlocked)
+        {
+            PlayerPrefs.SetInt("UnlockedLevel", currentLevelIndex + 1);
+            PlayerPrefs.Save();
         }
     }
 

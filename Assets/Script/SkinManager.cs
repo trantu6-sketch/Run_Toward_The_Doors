@@ -16,6 +16,9 @@ public class SkinManager : MonoBehaviour
     [Header("Scene Settings")]
     public string gameSceneName = "SampleScene"; // Tên của Scene màn chơi chính (nhớ add vào Build Settings)
 
+    [Header("Level Selection")]
+    public LevelSelectionManager levelSelectionManager; // Tham chiếu đến bảng chọn Level
+
     private int currentIndex = 0;
 
     void Start()
@@ -83,7 +86,15 @@ public class SkinManager : MonoBehaviour
         // Có thể lưu lại trước khi chơi cho chắc ăn
         SaveSkin();
         
-        // Chuyển sang màn chơi chính
-        SceneManager.LoadScene(gameSceneName);
+        // Mở bảng chọn Level thay vì vào thẳng game
+        if (levelSelectionManager != null)
+        {
+            levelSelectionManager.OpenLevelPanel();
+        }
+        else
+        {
+            Debug.LogWarning("Chưa gán LevelSelectionManager! Đang load scene mặc định.");
+            SceneManager.LoadScene(gameSceneName);
+        }
     }
 }
