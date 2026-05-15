@@ -48,6 +48,12 @@ public class WinTrigger : MonoBehaviour
 
     private void HandleWinCondition(GameObject player)
     {
+        // Dừng thời gian lại ngay lập tức
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.StopTimer();
+        }
+
         // 1. Chặn nhân vật di chuyển
         PlayerMove playerMove = player.GetComponent<PlayerMove>();
         if (playerMove != null)
