@@ -13,6 +13,10 @@ public class PlayerMove : MonoBehaviour
     public float groundCheckDistance = 1.1f; // Độ dài tia check đất (từ tâm nhân vật xuống)
     public LayerMask groundMask; // Layer của mặt đất
 
+    [Header("Mobile UI Controls")]
+    public MobileJoystick joystick;
+    public MobileButton jumpButton;
+
     private Rigidbody rb;
     private Animator anim;
     private bool isGrounded;
@@ -71,11 +75,18 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        // Lấy input từ bàn phím (Sử dụng Input System mới)
         float moveX = 0f;
         float moveZ = 0f;
 
-        if (Keyboard.current != null)
+        // Lấy input từ Mobile Joystick (nếu có)
+        if (joystick != null && joystick.InputDirection.magnitude > 0.05f)
+        {
+            // Trục X của Joystick (kéo trái/phải) điều khiển trục Z (Tiến/Lùi) -> Giống phím A/D
+            moveZ = joystick.InputDirection.x;
+            // Trục Y của Joystick (kéo lên/xuống) điều khiển trục X (Sang trái/phải) -> Giống phím W/S
+            moveX = -joystick.InputDirection.y;
+        }
+        else if (Keyboard.current != null)
         {
             // D là tiến lên (Z+)
             if (Keyboard.current.dKey.isPressed || Keyboard.current.upArrowKey.isPressed) moveZ += 1f;
@@ -105,8 +116,20 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        // Nếu nhấn phím Space (Jump) và đang đứng trên mặt đất (Sử dụng Input System mới)
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
+        bool jumpInput = false;
+
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            jumpInput = true;
+        }
+
+        if (jumpButton != null && jumpButton.WasPressedThisFrame)
+        {
+            jumpInput = true;
+        }
+
+        // Nếu có lệnh nhảy và đang đứng trên mặt đất
+        if (jumpInput && isGrounded)
         {
             // Thêm lực nhảy thẳng đứng lên
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
