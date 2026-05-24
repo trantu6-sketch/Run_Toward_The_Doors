@@ -286,7 +286,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -358,8 +358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 272.00427, y: 259.00427}
-  m_SizeDelta: {x: 272.0085, y: 272.0085}
+  m_AnchoredPosition: {x: 235, y: 222}
+  m_SizeDelta: {x: 345, y: 345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4750299553079282174
 CanvasRenderer:
@@ -446,12 +446,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8936516585134697424}
   - {fileID: 7180435896441759917}
   - {fileID: 2300629780466308384}
   - {fileID: 5765068213773817874}
   - {fileID: 2346647390527557884}
   - {fileID: 8489603711955907470}
+  - {fileID: 5044159347037070722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3771539316512351729
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkinController
   skinModels:
-  - {fileID: 8937773895555974668}
+  - {fileID: 0}
   - {fileID: 7046199745803394199}
   - {fileID: 6081369630981775769}
   - {fileID: 3341247936633853339}
@@ -625,14 +625,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd0c11c6da6936749b00f0b994c39e6e, type: 3}
---- !u!4 &8936516585134697424 stripped
+--- !u!4 &5044159347037070722 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6739775819796664519, guid: fd0c11c6da6936749b00f0b994c39e6e, type: 3}
-  m_PrefabInstance: {fileID: 2417478738677103383}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8937773895555974668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6739010233772277019, guid: fd0c11c6da6936749b00f0b994c39e6e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7461593948800425621, guid: fd0c11c6da6936749b00f0b994c39e6e, type: 3}
   m_PrefabInstance: {fileID: 2417478738677103383}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3422486757459198881
